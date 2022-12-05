@@ -162,11 +162,12 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
                 // Increment count of pixels to average by
                 count += 1.0;
 
-                // If bottom middle pixel exists, check for bottom right and bottom left, respectively
+                // If bottom middle pixel exists, check for bottom right pixel
                 if (j + 1 < width)
                 {
                     bot_right = copied_image[i + 1][j + 1];
 
+                    // Add RGB values to respective running totals
                     sum_red += bot_right.rgbtRed;
                     sum_green += bot_right.rgbtGreen;
                     sum_blue += bot_right.rgbtBlue;
@@ -174,10 +175,12 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
                     count += 1.0;
                 }
 
+                // If bottom middle pixel exists, check for bottom left pixel
                 if (j - 1 >= 0)
                 {
                     bot_left = copied_image[i + 1][j - 1];
 
+                    // Add RGB values to respective running totals
                     sum_red += bot_left.rgbtRed;
                     sum_green += bot_left.rgbtGreen;
                     sum_blue += bot_left.rgbtBlue;
@@ -191,17 +194,19 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
             {
                 top_mid = copied_image[i - 1][j];
 
+                // Add RGB values to respective running totals
                 sum_red += top_mid.rgbtRed;
                 sum_green += top_mid.rgbtGreen;
                 sum_blue += top_mid.rgbtBlue;
 
                 count += 1.0;
 
-                // If top middle pixel exists, check for top right and top left, respectively
+                // If top middle pixel exists, check for top right pixel
                 if (j + 1 < width)
                 {
                     top_right = copied_image[i - 1][j + 1];
 
+                    // Add RGB values to respective running totals
                     sum_red += top_right.rgbtRed;
                     sum_green += top_right.rgbtGreen;
                     sum_blue += top_right.rgbtBlue;
@@ -209,10 +214,12 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
                     count += 1.0;
                 }
 
+                // If top middle pixel exists, check for top left pixel
                 if (j - 1 >= 0)
                 {
                     top_left = copied_image[i - 1][j - 1];
 
+                    // Add RGB values to respective running totals
                     sum_red += top_left.rgbtRed;
                     sum_green += top_left.rgbtGreen;
                     sum_blue += top_left.rgbtBlue;
@@ -226,6 +233,7 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
             {
                 mid_right = copied_image[i][j + 1];
 
+                // Add RGB values to respective running totals
                 sum_red += mid_right.rgbtRed;
                 sum_green += mid_right.rgbtGreen;
                 sum_blue += mid_right.rgbtBlue;
@@ -238,6 +246,7 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
             {
                 mid_left = copied_image[i][j - 1];
 
+                // Add RGB values to respective running totals
                 sum_red += mid_left.rgbtRed;
                 sum_green += mid_left.rgbtGreen;
                 sum_blue += mid_left.rgbtBlue;
@@ -250,7 +259,7 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
             average_green = round(sum_green / count);
             average_blue = round(sum_blue / count);
 
-            // Assign the RGB values of the copied pixel to the original image to not calculate with calculated values
+            // Assign the RGB values of the copied pixel to the original image
             image[i][j].rgbtRed = average_red;
             image[i][j].rgbtGreen = average_green;
             image[i][j].rgbtBlue = average_blue;
