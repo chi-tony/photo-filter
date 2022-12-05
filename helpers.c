@@ -233,7 +233,7 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
                 count += 1.0;
             }
 
-            // Check for pixel directly to the right of middle
+            // Check for pixel directly to the left of middle
             if (j - 1 >= 0)
             {
                 mid_left = copied_image[i][j - 1];
